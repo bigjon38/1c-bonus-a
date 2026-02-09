@@ -88,3 +88,85 @@ variable "local_trusted_ip" {
   type        = string
   default     = "71.58.15.16/32" # TODO: student supplies their IP or CIDR
 }
+
+variable "domain_name" {
+  description = "Base domain students registered (e.g., armageddon.click)."
+  type        = string
+  default     = "armageddon.click" # TODO: student supplies
+}
+
+variable "app_subdomain" {
+  description = "App hostname prefix (e.g., app.armageddon.click)."
+  type        = string
+  default     = "app"
+}
+
+variable "certificate_validation_method" {
+  description = "ACM validation method. Students can do DNS (Route53) or EMAIL."
+  type        = string
+  default     = "DNS"
+}
+
+variable "enable_waf" {
+  description = "Toggle WAF creation."
+  type        = bool
+  default     = true
+}
+
+variable "alb_5xx_threshold" {
+  description = "Alarm threshold for ALB 5xx count."
+  type        = number
+  default     = 10
+}
+
+variable "alb_5xx_period_seconds" {
+  description = "CloudWatch alarm period."
+  type        = number
+  default     = 300
+}
+
+variable "alb_5xx_evaluation_periods" {
+  description = "Evaluation periods for alarm."
+  type        = number
+  default     = 1
+}
+
+variable "manage_route53_in_terraform" {
+  description = "If true, Terraform will create and manage the Route53 hosted zone. If false, provide existing hosted zone ID."
+  type        = bool
+  default     = true
+}
+
+variable "route53_hosted_zone_id" {
+  description = "If not managing Route53 in Terraform, provide the hosted zone ID."
+  type        = string
+  default     = "" # TODO: student supplies if manage_route53_in_terraform is false
+}
+
+variable "alb_access_logs_prefix" {
+  description = "Prefix for ALB access logs in S3."
+  type        = string
+  default     = "alb-access-logs/"
+
+}
+
+variable "enable_alb_access_logs" {
+  description = "Enable ALB access logging to S3."
+  type        = bool
+  default     = true
+
+}
+
+variable "waf_log_destination" {
+  description = "Destination for WAF logs: 's3' or 'firehose'."
+  type        = string
+  default     = "firehose"
+}
+
+variable "waf_log_retention_days" {
+  description = "Retention for WAF CloudWatch log group."
+  type        = number
+  default     = 14
+
+}
+

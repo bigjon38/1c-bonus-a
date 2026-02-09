@@ -84,3 +84,16 @@ resource "aws_security_group" "armageddon_vpce_sg01" {
     Name = "${local.armageddon_prefix}-vpce-sg01"
   }
 }
+
+resource "aws_security_group" "armageddon_ec2_sg01" {
+  name        = "${local.name_prefix}-ec2-sg01"
+  description = "EC2 app security group"
+  vpc_id      = aws_vpc.armageddon_vpc01.id
+
+  # TODO: student adds inbound rules (HTTP 80, SSH 22 from their IP)
+  # TODO: student ensures outbound allows DB port to RDS SG (or allow all outbound)
+
+  tags = {
+    Name = "${local.name_prefix}-ec2-sg01"
+  }
+}
